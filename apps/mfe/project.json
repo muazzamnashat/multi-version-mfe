@@ -7,22 +7,33 @@
   "tags": [],
   "targets": {
     "build": {
-      "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "executor": "@nx/angular:webpack-browser",
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/mfe",
         "index": "apps/mfe/src/index.html",
         "main": "apps/mfe/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": [
+          "zone.js"
+        ],
         "tsConfig": "apps/mfe/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
           {
             "glob": "**/*",
-            "input": "apps/mfe/public"
+            "input": "apps/mfe/public",
+            "output": "."
           }
         ],
-        "styles": ["apps/mfe/src/styles.scss"]
+        "styles": [
+          "apps/mfe/src/styles.scss"
+        ],
+        "customWebpackConfig": {
+          "path": "apps/mfe/webpack.config.js"
+        },
+        "commonChunk": false
       },
       "configurations": {
         "production": {
@@ -38,7 +49,10 @@
               "maximumError": "8kb"
             }
           ],
-          "outputHashing": "all"
+          "outputHashing": "all",
+          "customWebpackConfig": {
+            "path": "apps/mfe/webpack.prod.config.js"
+          }
         },
         "development": {
           "buildOptimizer": false,
@@ -53,7 +67,7 @@
     },
     "serve": {
       "continuous": true,
-      "executor": "@angular-devkit/build-angular:dev-server",
+      "executor": "@nx/angular:dev-server",
       "configurations": {
         "production": {
           "buildTarget": "mfe:build:production"
@@ -62,12 +76,17 @@
           "buildTarget": "mfe:build:development"
         }
       },
-      "defaultConfiguration": "development"
+      "defaultConfiguration": "development",
+      "options": {
+        "port": 3000,
+        "publicHost": "http://localhost:3000"
+      }
     },
     "extract-i18n": {
-      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "executor": "ngx-build-plus:extract-i18n",
       "options": {
-        "buildTarget": "mfe:build"
+        "buildTarget": "mfe:build",
+        "extraWebpackConfig": "apps/mfe/webpack.config.js"
       }
     },
     "lint": {
