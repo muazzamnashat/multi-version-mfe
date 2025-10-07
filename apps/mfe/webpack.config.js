@@ -7,13 +7,8 @@ module.exports = withModuleFederationPlugin({
   exposes: {
     './Module': './src/app/mfe/mfe-module.ts',
   },
-
   shared: {
     ...shareAll({ singleton: true, strictVersion: true, requiredVersion: 'auto' }),
-    // "@angular/common" : { singleton: true, strictVersion: true, requiredVersion: '20.3.3' }
-    // "@angular/router" : { singleton: false, strictVersion: true, requiredVersion: '20.3.3' },
-    // ...['@angular/core', '@angular/common']
-    // ...['@angular/core', '@angular/common', '@angular/router']
   },
 
 });

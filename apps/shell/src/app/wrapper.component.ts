@@ -21,6 +21,9 @@ export class WrapperComponent implements AfterContentInit {
     const importName = this.route.snapshot.data['importName'] as keyof typeof registry;
 
     const importFn = registry[importName];
+
+    console.log('importing', importName, 'from registry', importFn);
+    console.log('elementName', elementName);
     importFn()
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       .then(_ => console.debug(`element ${elementName} loaded!`))

@@ -1,7 +1,8 @@
-import { bootstrapApplication, platformBrowser } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
-import { AppComponent } from './app/app.component';
 import { AppModule } from './app/app.module';
+import { bootstrap } from '@angular-architects/module-federation-tools';
 
-platformBrowser().bootstrapModule(AppModule)
-  .catch((err: any) => console.error(err));
+bootstrap(AppModule, {
+  production: false,
+  appType: 'microfrontend' // for micro frontend
+  // appType: 'shell', // for shell
+});

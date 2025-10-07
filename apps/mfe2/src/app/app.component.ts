@@ -9,4 +9,5 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   protected readonly title = 'mfe-2';
+  protected readonly angularVersion = '19.2.0';
 }
