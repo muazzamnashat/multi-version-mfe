@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { format } from 'date-and-time';
 
 @Component({
   selector: 'app-mfe',
@@ -9,4 +10,7 @@ import { Component } from '@angular/core';
 })
 export class Mfe {
 
+  formatDate(): string {
+    return format(new Date(), 'ddd, MMM DD YYYY');
+  }
 }

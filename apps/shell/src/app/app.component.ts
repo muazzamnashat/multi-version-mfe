@@ -14,7 +14,7 @@ declare const require: any;
   Angular Version in Shell: {{ngVersion}}
   </p>
   <button mat-flat-button type="button" color="primary">
-    Mat Button Using material version 20.2.7
+    Using material version 20.2.7
   </button>
   <p>&nbsp;</p>
   <a href="/mfe/home" >GO TO MFE</a>
