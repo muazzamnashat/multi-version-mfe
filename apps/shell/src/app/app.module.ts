@@ -7,10 +7,14 @@ import { WrapperComponent } from './wrapper.component';
 import { App } from './app';
 import { loadRemoteModule } from '@angular-architects/module-federation';
 import { Home } from './home/home';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatButtonModule} from '@angular/material/button';
 import { startsWith, WebComponentWrapper, WebComponentWrapperOptions } from '@angular-architects/module-federation-tools';
 @NgModule({
   imports: [
     BrowserModule,
+    MatBadgeModule,
+    MatButtonModule,
     RouterModule.forRoot([
       { path: '', component: Home, pathMatch: 'full' },
       {

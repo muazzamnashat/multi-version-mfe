@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { App } from './app';
 import { Home } from './home/home';
 import { BrowserModule } from '@angular/platform-browser';
+import { MatButtonModule } from '@angular/material/button';
 
 
 
@@ -15,6 +16,7 @@ import { BrowserModule } from '@angular/platform-browser';
   imports: [
     BrowserModule,
     MfeModule,
+    MatButtonModule,
     RouterModule.forRoot(routes),
   ],
   bootstrap: [App]

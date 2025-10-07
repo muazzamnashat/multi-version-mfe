@@ -9,6 +9,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { routes } from './app.routes';
 import { createCustomElement } from '@angular/elements';
 
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatButtonModule} from '@angular/material/button';
 
 
 @NgModule({
@@ -16,7 +18,9 @@ import { createCustomElement } from '@angular/elements';
   imports: [
     BrowserModule,
     Mfe2Module,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    MatBadgeModule,
+    MatButtonModule
   ],
   bootstrap: []
 })
