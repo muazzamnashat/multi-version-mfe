@@ -7,5 +7,10 @@ export const appRoutes: Route[] = [
 		path: 'mfe',
 		loadComponent: () =>
     import('mfe/App').then(m => m.App) 
+	},
+	{
+		path: 'mfe',
+		loadComponent: () =>
+    import('mfe/App').then(m => m.App) 
 	}
 ];

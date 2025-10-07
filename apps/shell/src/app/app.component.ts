@@ -9,10 +9,6 @@ declare const require: any;
   Angular Version in Shell: {{ngVersion}}
 </p>
 <p>&nbsp;</p>
-<ul>
-  <li><a routerLink="mfe">MFE</a></li>
-
-</ul>
 <router-outlet></router-outlet>
   `,
   // eslint-disable-next-line @angular-eslint/prefer-standalone

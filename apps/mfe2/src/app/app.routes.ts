@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { Mfe } from './mfe/mfe';
 import { Home } from './home/home';
 
 export const routes: Routes = [{

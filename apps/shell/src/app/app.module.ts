@@ -6,13 +6,34 @@ import { RouterModule } from '@angular/router';
 import { startsWith } from './router.utils';
 import { WrapperComponent } from './wrapper.component';
 import { App } from './app';
-
+import { loadRemoteModule } from '@angular-architects/module-federation';
+import { Home } from './home/home';
 @NgModule({
   imports: [
     BrowserModule,
     RouterModule.forRoot([
-      { path: '', component: App, pathMatch: 'full' },
-      { matcher: startsWith('mfe'), component: WrapperComponent, data: { importName: 'mfe', elementName: 'mfe-element' } },
+      { path: '', component: Home, pathMatch: 'full' },
+      {
+        path: 'mfe',
+        loadChildren: () =>
+            loadRemoteModule({
+                type: 'module',
+                remoteEntry: 'http://localhost:3000/remoteEntry.js',
+                exposedModule: './Module'
+            })
+            .then(m => m.MfeModule)
+    },
+    {
+        path: 'mfe2',
+        loadChildren: () =>
+            loadRemoteModule({
+                type: 'module',
+                remoteEntry: 'http://localhost:4400/remoteEntry.js',
+                exposedModule: './Module'
+            })
+            .then(m => m.Mfe2Module)
+    },
+      // { matcher: startsWith('mfe'), component: WrapperComponent, data: { importName: 'mfe', elementName: 'mfe-element' } },
 
     ])
   ],
@@ -24,7 +45,7 @@ import { App } from './app';
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  constructor(private ngZone: NgZone) {
-    (window as any).ngZone = this.ngZone;
+  constructor() {
+    // (window as any).ngZone = this.ngZone;
   }
 }

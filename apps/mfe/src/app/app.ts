@@ -1,13 +1,13 @@
-import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { NxWelcome } from './nx-welcome';
+import { Component, signal } from '@angular/core';
 
 @Component({
-  imports: [NxWelcome, RouterModule],
-  selector: 'app-root',
+  // eslint-disable-next-line @angular-eslint/component-selector
+  selector: 'mfe-root',
   templateUrl: './app.html',
   styleUrl: './app.scss',
+  // eslint-disable-next-line @angular-eslint/prefer-standalone
+  standalone: false
 })
 export class App {
-  protected title = 'mfe';
+  protected readonly title = signal('mfe');
 }
