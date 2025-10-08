@@ -19,7 +19,7 @@ const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPl
 
     module.exports = {
       output: {
-        publicPath: "http://localhost:3000/",
+        publicPath: "http://localhost:4300/",
         uniqueName: "mfe"
       },
       optimization: {
@@ -40,7 +40,7 @@ const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPl
             // For hosts (please adjust)
             /*
             remotes: {
-                'mfe1': "mfe1@http://localhost:3000/remoteEntry.js" 
+                'mfe1': "mfe1@http://localhost:4300/remoteEntry.js" 
             },
             */
 

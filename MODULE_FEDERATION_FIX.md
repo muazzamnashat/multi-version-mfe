@@ -48,7 +48,7 @@ Commands I ran (diagnostics + fix)
 
 1. Reproduce error
 
-   nx serve mfe --port 3000
+   nx serve mfe --port 4300
 
 2. Inspect installed webpack versions
 
@@ -75,7 +75,7 @@ How I verified the fix
 
 2. Started both apps:
 
-   - `nx serve mfe --port 3000`
+   - `nx serve mfe --port 4300`
    - `nx serve shell --port 4200`
 
    The previous ModuleFederationPlugin TypeError no longer occurred and the

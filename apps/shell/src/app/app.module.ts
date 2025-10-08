@@ -22,7 +22,7 @@ import { startsWith, WebComponentWrapper, WebComponentWrapperOptions } from '@an
         loadChildren: () =>
             loadRemoteModule({
                 type: 'module',
-                remoteEntry: 'http://localhost:3000/remoteEntry.js',
+                remoteEntry: 'http://localhost:4300/remoteEntry.js',
                 exposedModule: './Module'
             })
             .then(m => m.MfeModule)
