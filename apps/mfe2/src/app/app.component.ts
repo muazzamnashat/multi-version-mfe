@@ -1,5 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, Inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { USELESS_SERVICE_INSTANCE, UselessService } from '@shared/ng-ui';
 
 @Component({
   selector: 'mfe2-root',
@@ -10,4 +11,12 @@ import { RouterOutlet } from '@angular/router';
 export class AppComponent {
   protected readonly title = 'mfe-2';
   protected readonly angularVersion = '19.2.0';
+
+  constructor(public uselessService: UselessService) {
+  // constructor(@Inject(USELESS_SERVICE_INSTANCE) public uselessService: UselessService) {
+  }
+
+  increment() {
+    this.uselessService.increment();
+  }
 }

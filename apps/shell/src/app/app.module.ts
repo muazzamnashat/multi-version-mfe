@@ -5,16 +5,19 @@ import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
 import { WrapperComponent } from './wrapper.component';
 import { App } from './app';
-import { loadRemoteModule } from '@angular-architects/module-federation';
+// import { loadRemoteModule } from '@angular-architects/module-federation';
 import { Home } from './home/home';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatButtonModule} from '@angular/material/button';
 import { startsWith, WebComponentWrapper, WebComponentWrapperOptions } from '@angular-architects/module-federation-tools';
+import { loadRemoteModule } from '@angular-architects/module-federation';
+import { NgUiModule, SharedServiceProvider, USELESS_SERVICE_INSTANCE } from '@shared/ng-ui';
 @NgModule({
   imports: [
     BrowserModule,
     MatBadgeModule,
     MatButtonModule,
+    NgUiModule,
     RouterModule.forRoot([
       { path: '', component: Home, pathMatch: 'full' },
       {
@@ -22,6 +25,7 @@ import { startsWith, WebComponentWrapper, WebComponentWrapperOptions } from '@an
         loadChildren: () =>
             loadRemoteModule({
                 type: 'module',
+                // remoteName: 'mfe',
                 remoteEntry: 'http://localhost:4300/remoteEntry.js',
                 exposedModule: './Module'
             })
@@ -55,7 +59,9 @@ import { startsWith, WebComponentWrapper, WebComponentWrapperOptions } from '@an
     AppComponent,
     WrapperComponent
   ],
-  providers: [],
+  providers: [
+    // SharedServiceProvider.getSharedUselessServiceProvider()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

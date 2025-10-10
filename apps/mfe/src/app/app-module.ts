@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
   declarations: [App, Home],
   imports: [
     BrowserModule,
+    CommonModule,
     MfeModule,
     MatButtonModule,
     RouterModule.forRoot(routes),

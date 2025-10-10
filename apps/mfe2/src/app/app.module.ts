@@ -11,16 +11,18 @@ import { createCustomElement } from '@angular/elements';
 
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatButtonModule} from '@angular/material/button';
-
+import { SharedServiceProvider } from '@shared/ng-ui';
 
 @NgModule({
   declarations: [AppComponent, Home],
   imports: [
-    BrowserModule,
     Mfe2Module,
     RouterModule.forRoot(routes),
     MatBadgeModule,
     MatButtonModule
+  ],
+  providers: [
+    // SharedServiceProvider.getSharedUselessServiceProvider()
   ],
   bootstrap: []
 })

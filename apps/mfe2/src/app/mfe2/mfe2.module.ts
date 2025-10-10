@@ -13,6 +13,7 @@ import {MatButtonModule} from '@angular/material/button';
   declarations: [Mfe2Component],
   imports: [
     CommonModule,
+    BrowserModule,
     RouterModule.forChild([
       { path: 'home', component: Mfe2Component }
     ]),
