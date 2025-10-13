@@ -1,38 +1,24 @@
-import { Injectable, InjectionToken, Provider, Type } from '@angular/core';
+import { InjectionToken, Provider, Type } from '@angular/core';
 
 // Unified registry for auto-shared services
 interface ServiceEntry {
-  class: Type<any>;
-  instance: any;
+  class: Type<AutoSharedService>;
+  instance: AutoSharedService;
 }
 
 const serviceRegistry = new Map<string, ServiceEntry>();
-const tokenCache = new Map<string, InjectionToken<any>>();
+const tokenCache = new Map<string, InjectionToken<AutoSharedService>>(); //if use injection based tokens, use this map
 
 /**
  * Base class for services that should be automatically shared across microfrontends
  * Just extend this class and your service will be automatically shared!
  */
-@Injectable()
-export abstract class AutoSharedService {
-  // private static readonly serviceName = Symbol('serviceName');
-  
-  constructor() {
-    const serviceName = this.constructor.name;
-    
-    // Register this service as shared if not already registered
-    if (!serviceRegistry.has(serviceName)) {
-      serviceRegistry.set(serviceName, {
-        class: this.constructor as Type<any>,
-        instance: this
-      });
-    }
-  }
-  
+export class AutoSharedService {
   /**
    * Get the shared instance of this service
    */
-  static getSharedInstance<T extends AutoSharedService>(this: new (...args: any[]) => T): T {
+  static getSharedInstance<T extends AutoSharedService>(this: new (...args: unknown[]) => T): T {
+    
     const serviceName = this.name;
     if (!serviceRegistry.has(serviceName)) {
       // Create instance if it doesn't exist
@@ -42,13 +28,20 @@ export abstract class AutoSharedService {
         instance: instance
       });
     }
-    return serviceRegistry.get(serviceName)!.instance;
+    return serviceRegistry.get(serviceName)?.instance as T;
   }
   
   /**
    * Get the injection token for this service
    */
-  static getSharedToken<T extends AutoSharedService>(this: new (...args: any[]) => T): InjectionToken<T> {
+
+  // // Use string tokens instead of InjectionToken
+  // // More compatible across versions
+  // static getSharedToken<T extends AutoSharedService>(this: new (...args: unknown[]) => T): string {
+  //   const serviceName = this.name;
+  //   return `${serviceName}_AUTO_SHARED_TOKEN`;
+  // }
+  static getSharedToken<T extends AutoSharedService>(this: new (...args: unknown[]) => T): InjectionToken<T> {
     const serviceName = this.name;
     const tokenName = `${serviceName}_AUTO_SHARED_TOKEN`;
     
@@ -65,7 +58,7 @@ export abstract class AutoSharedService {
   /**
    * Get the provider configuration for this service
    */
-  static getSharedProvider<T extends AutoSharedService>(this: new (...args: any[]) => T) {
+  static getSharedProvider<T extends AutoSharedService>(this: new (...args: unknown[]) => T): Provider {
     const serviceClass = this as any;
     return {
       provide: serviceClass.getSharedToken(),
@@ -96,7 +89,7 @@ export abstract class AutoSharedService {
   static getAllProviders(): Provider[] {
     const providers: Provider[] = [];
     
-    for (const [serviceName, entry] of serviceRegistry) {
+    for (const [ serviceName , entry] of serviceRegistry) {
       if (entry.class.prototype instanceof AutoSharedService) {
         const serviceClass = entry.class as any;
         const provider = serviceClass.getSharedProvider();
@@ -107,19 +100,19 @@ export abstract class AutoSharedService {
     return providers;
   }
 
-  /**
-   * Get a specific shared service instance by class
-   * @param serviceClass The service class
-   */
-  static getSharedInstanceByClass<T extends AutoSharedService>(serviceClass: Type<T>): T {
-    return (serviceClass as any).getSharedInstance();
-  }
+  // /**
+  //  * Get a specific shared service instance by class
+  //  * @param serviceClass The service class
+  //  */
+  // static getSharedInstanceByClass<T extends AutoSharedService>(serviceClass: Type<T>): T {
+  //   return (serviceClass as any).getSharedInstance();
+  // }
 
   /**
    * Get the injection token for a specific service by class
    * @param serviceClass The service class
    */
-  static getSharedTokenByClass<T extends AutoSharedService>(serviceClass: Type<T>) {
+  static getSharedTokenByClass<T extends AutoSharedService>(serviceClass: Type<T>): InjectionToken<T> {
     return (serviceClass as any).getSharedToken();
   }
 }

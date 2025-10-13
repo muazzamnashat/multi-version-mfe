@@ -11,10 +11,8 @@ import { createCustomElement } from '@angular/elements';
 
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatButtonModule} from '@angular/material/button';
-import { SharedServicesModule, AutoSharedService, UselessService } from '@shared/ng-ui';
+import { SharedServicesModule } from '@shared/ng-ui';
 
-// Register services before module instantiation
-// SharedServiceRegistry.register(UselessService);
 
 @NgModule({
   declarations: [AppComponent, Home],
