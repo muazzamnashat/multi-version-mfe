@@ -6,7 +6,7 @@ import { Router, RouterModule } from '@angular/router';
 import { routes } from '../app.routes';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatButtonModule} from '@angular/material/button';
-
+import { SharedServicesModule } from '@shared/ng-ui';
 
 
 @NgModule({
@@ -19,6 +19,7 @@ import {MatButtonModule} from '@angular/material/button';
     ]),
     MatBadgeModule,
     MatButtonModule,
+    SharedServicesModule
   ]
 })
 export class Mfe2Module { }

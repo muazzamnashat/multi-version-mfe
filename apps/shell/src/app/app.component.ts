@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
-import { UselessService, USELESS_SERVICE_INSTANCE } from '@shared/ng-ui';
+import { Router } from '@angular/router';
+import { UselessService, SharedServiceRegistry } from '@shared/ng-ui';
 
 declare const require: any;
 
@@ -17,8 +18,8 @@ declare const require: any;
     </button>
     Count: {{uselessService.getCount}}
     <p>&nbsp;</p>
-    <a href="/mfe/home" >GO TO MFE</a>
-    <a href="/mfe2/home"  style="margin-left: 24px;">GO TO MFE2</a>
+    <button (click)="navigateToMfe('/mfe/home')" >GO TO MFE</button>
+    <button (click)="navigateToMfe('/mfe2/home')"  style="margin-left: 24px;">GO TO MFE2</button>
     <router-outlet></router-outlet>
   `,
   // eslint-disable-next-line @angular-eslint/prefer-standalone
@@ -27,11 +28,15 @@ declare const require: any;
 export class AppComponent {
 
   // eslint-disable-next-line @angular-eslint/prefer-inject
-  constructor(public uselessService: UselessService) {
-  // constructor(@Inject(USELESS_SERVICE_INSTANCE) public uselessService: UselessService) {
+  constructor(@Inject(SharedServiceRegistry.getSharedToken(UselessService)) public uselessService: UselessService, private router: Router) {
   }
 
   ngVersion = require('../../../../package.json').dependencies['@angular/core'];
 
   title = 'shell';
+
+  navigateToMfe(path: string) {
+    this.router.navigate([path]);
+  }
+
 }

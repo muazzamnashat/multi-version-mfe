@@ -11,18 +11,26 @@ import { createCustomElement } from '@angular/elements';
 
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatButtonModule} from '@angular/material/button';
-import { SharedServiceProvider } from '@shared/ng-ui';
+import { SharedServicesModule, SharedServiceRegistry, UselessService } from '@shared/ng-ui';
+
+// Register services before module instantiation
+// SharedServiceRegistry.register(UselessService);
 
 @NgModule({
   declarations: [AppComponent, Home],
   imports: [
     Mfe2Module,
+    SharedServicesModule,
     RouterModule.forRoot(routes),
     MatBadgeModule,
     MatButtonModule
   ],
   providers: [
-    // SharedServiceProvider.getSharedUselessServiceProvider()
+    // Add shared service providers directly
+    {
+      provide: SharedServiceRegistry.getSharedToken(UselessService),
+      useFactory: () => SharedServiceRegistry.getSharedInstance(UselessService)
+    }
   ],
   bootstrap: []
 })

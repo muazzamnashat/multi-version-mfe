@@ -8,8 +8,10 @@ import { App } from './app';
 import { Home } from './home/home';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatButtonModule } from '@angular/material/button';
+import { SharedServicesModule, SharedServiceRegistry, UselessService } from '@shared/ng-ui';
 
-
+// Register services before module instantiation
+// SharedServiceRegistry.register(UselessService);
 
 @NgModule({
   declarations: [App, Home],
@@ -18,7 +20,15 @@ import { MatButtonModule } from '@angular/material/button';
     CommonModule,
     MfeModule,
     MatButtonModule,
+    SharedServicesModule,
     RouterModule.forRoot(routes),
+  ],
+  providers: [
+    // Add shared service providers directly
+    {
+      provide: SharedServiceRegistry.getSharedToken(UselessService),
+      useFactory: () => SharedServiceRegistry.getSharedInstance(UselessService)
+    }
   ],
   bootstrap: [App]
 })

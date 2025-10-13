@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
 
 @Component({
-  imports: [RouterModule],
   selector: 'app-root',
+  // eslint-disable-next-line @angular-eslint/prefer-standalone
+  standalone: false,
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
 export class App {
-  protected title = 'shell';
+  protected title = 'mfe3';
 }

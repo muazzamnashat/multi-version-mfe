@@ -1,16 +1,13 @@
-import { Injectable, InjectionToken } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { AutoSharedService } from '../base/auto-shared-service';
 
-// Create a global instance token
-export const USELESS_SERVICE_INSTANCE = new InjectionToken<UselessService>('UselessServiceInstance');
-
-@Injectable({
-  providedIn: 'root'
-})
-export class UselessService {
+@Injectable()
+export class UselessService extends AutoSharedService {
   count = 0;
 
   constructor() {
-    console.log('UselessService constructor');
+    super();
+    console.log('UselessService constructor called');
   }
 
   increment() {
@@ -24,4 +21,5 @@ export class UselessService {
   get getCount() {
     return this.count;
   }
+
 }
