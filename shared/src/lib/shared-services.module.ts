@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
-import { SharedServiceRegistry } from './registry/shared-service-registry';
+import { AutoSharedService } from './base/auto-shared-service';
 import { UselessService } from './useless-service/useless-service';
 
 // Register services before module instantiation
-SharedServiceRegistry.register(UselessService);
+AutoSharedService.register(UselessService);
 
 /**
  * Module that automatically sets up all shared services
@@ -12,11 +12,8 @@ SharedServiceRegistry.register(UselessService);
 @NgModule({
   providers: [
     // Register services here
-    ...SharedServiceRegistry.getAllProviders()
+    ...AutoSharedService.getAllProviders()
   ]
 })
 export class SharedServicesModule {
-  // Add more services here as needed:
-  // SharedServiceRegistry.register(AnotherService);
-  // SharedServiceRegistry.register(YetAnotherService);
 }

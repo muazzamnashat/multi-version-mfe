@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { UselessService, SharedServiceRegistry } from '@shared/ng-ui';
+import { UselessService, AutoSharedService } from '@shared/ng-ui';
 import { format } from 'date-and-time';
 
 @Component({
@@ -12,7 +12,7 @@ import { format } from 'date-and-time';
 export class Mfe {
 
   // eslint-disable-next-line @angular-eslint/prefer-inject
-  constructor(@Inject(SharedServiceRegistry.getSharedToken(UselessService)) public uselessService: UselessService) {
+  constructor(@Inject(AutoSharedService.getSharedTokenByClass(UselessService)) public uselessService: UselessService) {
   }
 
   increment() {

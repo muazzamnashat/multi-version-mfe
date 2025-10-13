@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { UselessService, SharedServiceRegistry } from '@shared/ng-ui';
+import { UselessService, AutoSharedService } from '@shared/ng-ui';
 
 declare const require: any;
 
@@ -28,7 +28,8 @@ declare const require: any;
 export class AppComponent {
 
   // eslint-disable-next-line @angular-eslint/prefer-inject
-  constructor(@Inject(SharedServiceRegistry.getSharedToken(UselessService)) public uselessService: UselessService, private router: Router) {
+  constructor(@Inject(AutoSharedService.getSharedTokenByClass(UselessService)) public uselessService: UselessService, private router: Router) {
+    console.log('AppComponent: uselessService: -> ', this.uselessService);
   }
 
   ngVersion = require('../../../../package.json').dependencies['@angular/core'];

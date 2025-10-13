@@ -11,7 +11,7 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatButtonModule} from '@angular/material/button';
 import { startsWith, WebComponentWrapper, WebComponentWrapperOptions } from '@angular-architects/module-federation-tools';
 import { loadRemoteModule } from '@angular-architects/module-federation';
-import { NgUiModule, SharedServicesModule, SharedServiceRegistry, UselessService } from '@shared/ng-ui';
+import { NgUiModule, SharedServicesModule, AutoSharedService, UselessService } from '@shared/ng-ui';
 
 // Register services before module instantiation
 // SharedServiceRegistry.register(UselessService);
@@ -65,11 +65,7 @@ import { NgUiModule, SharedServicesModule, SharedServiceRegistry, UselessService
     WrapperComponent
   ],
   providers: [
-    // Add shared service providers directly
-    {
-      provide: SharedServiceRegistry.getSharedToken(UselessService),
-      useFactory: () => SharedServiceRegistry.getSharedInstance(UselessService)
-    }
+    // Shared services are automatically provided by SharedServicesModule
   ],
   bootstrap: [AppComponent]
 })

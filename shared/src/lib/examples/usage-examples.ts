@@ -118,35 +118,46 @@ export class ExampleComponent {
 
 import { UserService } from './examples/usage-examples';
 
+// Register services before module instantiation
+AutoSharedService.register(UselessService);
+AutoSharedService.register(UserService);        // Add this
+AutoSharedService.register(NotificationService); // Add this
+
 export class SharedServicesModule {
-  constructor() {
-    // Auto-register services
-    SharedServiceRegistry.register(UselessService);
-    SharedServiceRegistry.register(UserService);        // Add this
-    SharedServiceRegistry.register(NotificationService); // Add this
-  }
+  // Services are automatically provided via getAllProviders()
 }
 */
 
 // ========================================
-// EXAMPLE 5: Alternative Decorator Approach
+// EXAMPLE 5: Advanced Usage Patterns
 // ========================================
 
 /*
-import { SharedService } from '../decorators/shared-service.decorator';
+// You can also create services with more complex logic:
 
-@SharedService()
-@Injectable({
-  providedIn: 'root'
-})
-export class AlternativeService {
-  data = 'shared data';
+@Injectable()
+export class AdvancedService extends AutoSharedService {
+  private data: Map<string, any> = new Map();
   
   constructor() {
-    console.log('AlternativeService created');
+    super();
+    this.initializeData();
+  }
+  
+  private initializeData() {
+    // Complex initialization logic
+    this.data.set('config', { theme: 'dark', language: 'en' });
+  }
+  
+  setConfig(key: string, value: any) {
+    this.data.set(key, value);
+  }
+  
+  getConfig(key: string) {
+    return this.data.get(key);
   }
 }
 
 // Usage in component:
-// const service = AlternativeService.getSharedInstance();
+// const service = inject(AdvancedService);
 */

@@ -1,7 +1,12 @@
-import { Injectable, InjectionToken } from '@angular/core';
+import { Injectable, InjectionToken, Provider, Type } from '@angular/core';
 
-// Global registry for auto-shared services
-const autoSharedRegistry = new Map<string, any>();
+// Unified registry for auto-shared services
+interface ServiceEntry {
+  class: Type<any>;
+  instance: any;
+}
+
+const serviceRegistry = new Map<string, ServiceEntry>();
 const tokenCache = new Map<string, InjectionToken<any>>();
 
 /**
@@ -16,8 +21,11 @@ export abstract class AutoSharedService {
     const serviceName = this.constructor.name;
     
     // Register this service as shared if not already registered
-    if (!autoSharedRegistry.has(serviceName)) {
-      autoSharedRegistry.set(serviceName, this);
+    if (!serviceRegistry.has(serviceName)) {
+      serviceRegistry.set(serviceName, {
+        class: this.constructor as Type<any>,
+        instance: this
+      });
     }
   }
   
@@ -26,12 +34,15 @@ export abstract class AutoSharedService {
    */
   static getSharedInstance<T extends AutoSharedService>(this: new (...args: any[]) => T): T {
     const serviceName = this.name;
-    if (!autoSharedRegistry.has(serviceName)) {
+    if (!serviceRegistry.has(serviceName)) {
       // Create instance if it doesn't exist
       const instance = new this();
-      autoSharedRegistry.set(serviceName, instance);
+      serviceRegistry.set(serviceName, {
+        class: this,
+        instance: instance
+      });
     }
-    return autoSharedRegistry.get(serviceName);
+    return serviceRegistry.get(serviceName)!.instance;
   }
   
   /**
@@ -60,5 +71,55 @@ export abstract class AutoSharedService {
       provide: serviceClass.getSharedToken(),
       useFactory: () => serviceClass.getSharedInstance()
     };
+  }
+
+  /**
+   * Register a service class for sharing
+   * This is called automatically when the service is instantiated
+   */
+  static register<T extends AutoSharedService>(serviceClass: Type<T>): void {
+    const serviceName = serviceClass.name;
+    if (!serviceRegistry.has(serviceName)) {
+      // Create instance when registering
+      const instance = new serviceClass();
+      serviceRegistry.set(serviceName, {
+        class: serviceClass,
+        instance: instance
+      });
+    }
+  }
+
+  /**
+   * Get all providers for registered shared services
+   * Call this in your module's providers array
+   */
+  static getAllProviders(): Provider[] {
+    const providers: Provider[] = [];
+    
+    for (const [serviceName, entry] of serviceRegistry) {
+      if (entry.class.prototype instanceof AutoSharedService) {
+        const serviceClass = entry.class as any;
+        const provider = serviceClass.getSharedProvider();
+        providers.push(provider);
+      }
+    }
+    
+    return providers;
+  }
+
+  /**
+   * Get a specific shared service instance by class
+   * @param serviceClass The service class
+   */
+  static getSharedInstanceByClass<T extends AutoSharedService>(serviceClass: Type<T>): T {
+    return (serviceClass as any).getSharedInstance();
+  }
+
+  /**
+   * Get the injection token for a specific service by class
+   * @param serviceClass The service class
+   */
+  static getSharedTokenByClass<T extends AutoSharedService>(serviceClass: Type<T>) {
+    return (serviceClass as any).getSharedToken();
   }
 }

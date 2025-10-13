@@ -11,7 +11,7 @@ import { createCustomElement } from '@angular/elements';
 
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatButtonModule} from '@angular/material/button';
-import { SharedServicesModule, SharedServiceRegistry, UselessService } from '@shared/ng-ui';
+import { SharedServicesModule, AutoSharedService, UselessService } from '@shared/ng-ui';
 
 // Register services before module instantiation
 // SharedServiceRegistry.register(UselessService);
@@ -26,11 +26,7 @@ import { SharedServicesModule, SharedServiceRegistry, UselessService } from '@sh
     MatButtonModule
   ],
   providers: [
-    // Add shared service providers directly
-    {
-      provide: SharedServiceRegistry.getSharedToken(UselessService),
-      useFactory: () => SharedServiceRegistry.getSharedInstance(UselessService)
-    }
+    // Shared services are automatically provided by SharedServicesModule
   ],
   bootstrap: []
 })
