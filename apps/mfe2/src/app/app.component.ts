@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ViewEncapsulation } from '@angular/core';
 import { UselessService, AutoSharedService } from '@shared/ng-ui';
 
 @Component({
@@ -6,6 +6,7 @@ import { UselessService, AutoSharedService } from '@shared/ng-ui';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   standalone: false,
+  encapsulation: ViewEncapsulation.ShadowDom
 })
 export class AppComponent {
   protected readonly title = 'mfe-2';

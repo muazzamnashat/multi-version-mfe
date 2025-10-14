@@ -9,9 +9,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { routes } from './app.routes';
 import { createCustomElement } from '@angular/elements';
 
-import {MatBadgeModule} from '@angular/material/badge';
-import {MatButtonModule} from '@angular/material/button';
 import { SharedServicesModule } from '@shared/ng-ui';
+import { OverlayContainer } from '@angular/cdk/overlay';
 
 
 @NgModule({
@@ -22,7 +21,7 @@ import { SharedServicesModule } from '@shared/ng-ui';
     RouterModule.forRoot(routes),
   ],
   providers: [
-    // Shared services are automatically provided by SharedServicesModule
+    // { provide: OverlayContainer, useClass: OverlayContainer }
   ],
   bootstrap: []
 })

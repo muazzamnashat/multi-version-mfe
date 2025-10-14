@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { UselessService, AutoSharedService } from '@shared/ng-ui';
 
@@ -14,7 +14,8 @@ declare const require: any;
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   // eslint-disable-next-line @angular-eslint/prefer-standalone
-  standalone: false
+  standalone: false,
+  encapsulation: ViewEncapsulation.ShadowDom
 })
 export class AppComponent {
 
