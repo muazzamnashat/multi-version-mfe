@@ -17,9 +17,11 @@ import { SharedServicesModule } from '@shared/ng-ui';
     RouterModule.forChild([
       { path: 'home', component: Mfe2Component }
     ]),
-    MatBadgeModule,
+    // MatBadgeModule,
     MatButtonModule,
     SharedServicesModule
-  ]
+  ],
+  exports: [Mfe2Component, MatButtonModule],
+  providers: []
 })
 export class Mfe2Module { }

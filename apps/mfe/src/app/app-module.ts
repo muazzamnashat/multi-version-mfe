@@ -19,7 +19,6 @@ import { SharedServicesModule, AutoSharedService, UselessService } from '@shared
     BrowserModule,
     CommonModule,
     MfeModule,
-    MatButtonModule,
     SharedServicesModule,
     RouterModule.forRoot(routes),
   ],

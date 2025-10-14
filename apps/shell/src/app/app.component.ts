@@ -11,17 +11,8 @@ declare const require: any;
       margin-top: 16px;
     }
   `,
-  template: `
-    <lib-header title="Angular Version in Shell: {{ngVersion}}"></lib-header>
-    <button mat-flat-button type="button" color="primary">
-      Using material version 20.2.7
-    </button>
-    Count: {{uselessService.getCount}}
-    <p>&nbsp;</p>
-    <button (click)="navigateToMfe('/mfe/home')" >GO TO MFE</button>
-    <button (click)="navigateToMfe('/mfe2/home')"  style="margin-left: 24px;">GO TO MFE2</button>
-    <router-outlet></router-outlet>
-  `,
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
   // eslint-disable-next-line @angular-eslint/prefer-standalone
   standalone: false
 })

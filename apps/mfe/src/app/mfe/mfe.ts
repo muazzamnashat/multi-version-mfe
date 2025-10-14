@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ViewEncapsulation } from '@angular/core';
 import { UselessService, AutoSharedService } from '@shared/ng-ui';
 import { format } from 'date-and-time';
 
@@ -7,7 +7,8 @@ import { format } from 'date-and-time';
   templateUrl: './mfe.html',
   styleUrl: './mfe.scss',
   // eslint-disable-next-line @angular-eslint/prefer-standalone
-  standalone: false
+  standalone: false,
+  // encapsulation: ViewEncapsulation.ShadowDom
 })
 export class Mfe {
 

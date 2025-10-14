@@ -20,8 +20,6 @@ import { SharedServicesModule } from '@shared/ng-ui';
     Mfe2Module,
     SharedServicesModule,
     RouterModule.forRoot(routes),
-    MatBadgeModule,
-    MatButtonModule
   ],
   providers: [
     // Shared services are automatically provided by SharedServicesModule

@@ -1,16 +1,16 @@
 <lib-header title="Angular Version in MFE: 20.3.0"></lib-header>
 <div>
-	Using material version 19.2.19
-	<button mat-flat-button style="background-color: blue; color: white; border-radius: 8px; margin-left: 12px;">
-		Mat Button
+	
+	<button mat-flat-button color="primary" style="margin-top: 12px;">
+		Using material version 19.2.19
 	</button>
+	
 </div>
-Count: {{uselessService.getCount}}
-<button mat-flat-button type="button" color="primary" (click)="increment()">Increment</button>
-<!-- <div style="margin-top: 12px;">
-	Using Bootstrap version 5.3.2
-	<button type="button" class="btn btn-primary"> Bootstrap Button </button>
-</div> -->
-
-<p>Time is formatted using a package that shell does not have: {{formatDate()}};</p>
+<div style="display: flex; flex-direction: row; align-items: center; gap: 8px; margin-top: 16px;">
+	<span>Count: {{uselessService.getCount}}</span>
+	<button mat-flat-button type="button" color="primary" (click)="increment()">Increment</button>
+</div>
+<div>
+	<p>Time is formatted using a package that shell does not have: {{formatDate()}};</p>
+</div>
   
