@@ -1,10 +1,10 @@
-<lib-header title="Angular Version in Shell: {{ngVersion}}"></lib-header>
-<button mat-flat-button type="button" color="primary">
-	Using material version 20.2.7
-</button>
-Count: {{uselessService.getCount}}
-<p>&nbsp;</p>
-<button mat-flat-button type="button" color="primary" (click)="navigateToMfe('/mfe/home')">GO TO MFE</button>
-<button mat-flat-button type="button" color="primary" (click)="navigateToMfe('/mfe2/home')"
-	style="margin-left: 24px;">GO TO MFE2</button>
+<div class="bg-app">
+	<lib-header title="Angular Version in Shell: {{ngVersion}}"></lib-header>
+	<span class="text-gray-700">Using material version 20.2.7</span>
+	<span class="text-gray-900 text-2xl ml-3">Count: {{uselessService.getCount}}</span>
+	<p>&nbsp;</p>
+	<button mat-flat-button type="button" color="primary" (click)="navigateToMfe('/mfe/home')">GO TO MFE</button>
+	<button mat-flat-button type="button" color="primary" (click)="navigateToMfe('/mfe2/home')"
+		style="margin-left: 24px;">GO TO MFE2</button>
+</div>
 <router-outlet></router-outlet>

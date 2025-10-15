@@ -1,12 +1,13 @@
-
-<h3>I'm a micro frontend exposed as a web component!</h3>
-<p>Angular Version in MFE2: {{ angularVersion }}</p>
-<div>
-    Using material version ^18.2.14
-    <button mat-flat-button color="primary" style="margin-left: 12px;">
-        Mat Button
-    </button>   
+<div class="bg-app">
+    <lib-header title="I'm a micro frontend exposed as a web component!"></lib-header>
+    <p>Angular Version in MFE2: {{ angularVersion }}</p>
+    <div>
+        Using material version ^18.2.14
+        <button mat-flat-button color="primary" style="margin-left: 12px;">
+            Mat Button
+        </button>
+    </div>
+    Count: {{uselessService.getCount}}
+    <button mat-flat-button type="button" color="primary" (click)="increment()">Increment</button>
 </div>
-Count: {{uselessService.getCount}}
-<button mat-flat-button type="button" color="primary" (click)="increment()">Increment</button>
 <router-outlet />

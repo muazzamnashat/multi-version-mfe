@@ -9,7 +9,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { routes } from './app.routes';
 import { createCustomElement } from '@angular/elements';
 
-import { SharedServicesModule } from '@shared/ng-ui';
+import { SharedServicesModule, NgUiModule } from '@shared/ng-ui';
 import { OverlayContainer } from '@angular/cdk/overlay';
 
 
@@ -18,6 +18,7 @@ import { OverlayContainer } from '@angular/cdk/overlay';
   imports: [
     Mfe2Module,
     SharedServicesModule,
+    NgUiModule,
     RouterModule.forRoot(routes),
   ],
   providers: [

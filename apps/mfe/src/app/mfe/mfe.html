@@ -1,14 +1,15 @@
-<lib-header title="Angular Version in MFE: 20.3.0"></lib-header>
-<div>
-	
+<div class="bg-app">
+	<lib-header title="Angular Version in MFE: 20.3.0"></lib-header>
+	<div>
+
 		Using material version 19.2.19
-	
+
+	</div>
+	<div style="display: flex; flex-direction: row; align-items: center; gap: 8px; margin-top: 16px;">
+		<span>Count: {{uselessService.getCount}}</span>
+		<button mat-flat-button type="button" color="primary" (click)="increment()">Increment</button>
+	</div>
+	<div>
+		<p>Time is formatted using a package that shell does not have: {{formatDate()}};</p>
+	</div>
 </div>
-<div style="display: flex; flex-direction: row; align-items: center; gap: 8px; margin-top: 16px;">
-	<span>Count: {{uselessService.getCount}}</span>
-	<button mat-flat-button type="button" color="primary" (click)="increment()">Increment</button>
-</div>
-<div>
-	<p>Time is formatted using a package that shell does not have: {{formatDate()}};</p>
-</div>
-  

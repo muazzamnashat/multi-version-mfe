@@ -46,9 +46,12 @@ const config = withModuleFederationPlugin({
   remotes: {
     mfe: 'http://localhost:4300/remoteEntry.js',
   },
-  shared: {
-    ...shareAll({ singleton: true, strictVersion: true, requiredVersion: 'auto' })
-  }
+  shared: [
+    {
+      ...shareAll({ singleton: true, strictVersion: true, requiredVersion: 'auto' })
+    },
+    "@shared/ng-ui"
+  ]
 });
 
 console.log(config);
