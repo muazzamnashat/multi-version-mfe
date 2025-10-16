@@ -39,19 +39,22 @@
 
 
 
-const { shareAll, withModuleFederationPlugin } = require('@angular-architects/module-federation/webpack');
+const { share,shareAll, withModuleFederationPlugin } = require('@angular-architects/module-federation/webpack');
 
 const config = withModuleFederationPlugin({
   library: { type: "module" },
   remotes: {
     mfe: 'http://localhost:4300/remoteEntry.js',
   },
-  shared: [
-    {
-      ...shareAll({ singleton: true, strictVersion: true, requiredVersion: 'auto' })
+  shared: {
+    '@shared/ng-ui': {
+      singleton: true,
+      requiredVersion: 'auto',
+      import: 'shared/src/index',
     },
-    "@shared/ng-ui"
-  ]
+    ...shareAll({ singleton: true, strictVersion: true, requiredVersion: 'auto' }),
+  }
+  
 });
 
 console.log(config);
